@@ -1,0 +1,101 @@
+***************************************************************************
+*********************** IMPLEMENT THESE FUNCTIONS *************************
+***************************************************************************
+
+uses crt;
+
+type PTCType=record
+     pc:array[1..80]of string;
+     s:array[1..500]of string;
+     end;
+     PTCArray=array[1..100]of PTCType;
+
+var Nptc,PTCBackground:integer;
+    PAINTCODE:PTCArray;
+    IsTrasparent:boolean;
+
+procedure DrawCode(A:PTCArray;x,y:integer);       // "x,y" are the coords of the first corner (left/up) you can change them..
+          var i,j,z,jj,n,nn,c,g,leng:integer;
+              t:char;
+              s,ss:string;
+          const strChar:string =chr(176)+chr(177)+chr(178)+chr(219)+chr(220)+chr(223)+chr(254)+chr(95)+chr(238)+chr(196)+chr(197)+chr(180)+chr(191)+chr(192)+chr(193)+chr(194)+chr(195)+chr(217)+chr(218)+chr(179)+chr(221)+chr(185)+chr(186)+chr(187)+chr(188)+chr(200)+chr(201)+chr(202)+chr(203)+chr(204)+chr(205)+chr(206)+chr(0);
+          begin
+          i:=1;
+          while((length(A[Nptc].pc[i])>0)and(i<81))do i:=i+1;
+          jj:=i-1;
+          for i:=1 to jj do
+            begin
+            n:=length(A[Nptc].pc[i])div 3; gotoxy(x,y+i-1);
+            for j:=1 to n do
+              begin
+              s:=copy(A[Nptc].pc[i],j*3-2,3);
+              nn:=((ord(s[1])-41)*125*125)+((ord(s[2])-41)*125)+(ord(s[3])-41);
+              str(nn,s); s:=copy('000000',1,7-length(s))+s;
+              val(copy(s,1,2),c);val(copy(s,3,1),g);val(copy(s,6,2),leng);
+              val(copy(s,4,2),nn);t:=strChar[nn];
+              if((t=chr(0))and(g=PTCBackground)and(IsTrasparent))then
+                  begin gotoxy(wherex+leng,y+i-1); end
+                  else
+                  begin
+                  textcolor(c);
+                  textbackground(g);
+                  for z:=1 to leng do write(t);
+                  end;
+              end;
+            end;
+          i:=1;
+          while((length(A[Nptc].s[i])>0)and(i<500))do i:=i+1;
+          jj:=i-1;
+          for i:=1 to jj do
+            begin
+            s:=A[Nptc].s[i];
+            val(copy(s,5,2),c);textcolor(c);
+            val(copy(s,7,1),c);textbackground(c);
+            val(copy(s,1,2),c);val(copy(s,3,2),g);gotoxy(c+x-1,g+y-1);
+            ss:=copy(s,8,length(s)-7);write(ss);
+            end;
+         end;
+
+***************************************************************************
+************************ ADD THESE LINES IN YOUR CODE *********************
+***************************************************************************
+
+PTCBackground:=1;
+IsTrasparent:=true;
+Nptc:=1;               // you can change this number
+
+PAINTCODE[Nptc].pc[1]:=('0HohC0H€hC0H]cHu0H]i*vƒ˜wi*v0H]cGŽcJDi*vƒ˜uƒ˜u');PAINTCODE[Nptc].pc[2]:=('0H˜cHucJC0H\cJCi*vƒ˜vi*v0H\cGŽ0H\cGŽcJC0H]i*ui*u');
+PAINTCODE[Nptc].pc[3]:=('0HhC0HqcHu0H]>R\i*vƒ˜ui*v0H^qRucHu0H\dku<”\0H\i*u');PAINTCODE[Nptc].pc[4]:=('0H˜cHv0H^i*w0H\djŽ0H^cHudl\cJC0H]i*u');
+PAINTCODE[Nptc].pc[5]:=('0H˜cHu0H]qTCcJCi*v0H]qRucI\0H]qRu0H]1S\0H\0H\');PAINTCODE[Nptc].pc[6]:=('0H_hC0H”cHu0H]cI\i*uqTCdku0H\<’Ž0H]<“u0H\qTCcHu0H]1Ru');
+PAINTCODE[Nptc].pc[7]:=('0Hf‰)”0HˆcHv0H\cJC0H]cGŽqRu0H\cHu0H^dl\p/ucI\cHu');PAINTCODE[Nptc].pc[8]:=('0Hc‰)š0H‡cHw‰}+hG‰}+cHvcHu');
+PAINTCODE[Nptc].pc[9]:=('0Ha‰)ž0H`hC0HqhC0Hj‰}hI‰}0H\0H\');PAINTCODE[Nptc].pc[10]:=('0H`‰) 0H’0H\');PAINTCODE[Nptc].pc[11]:=('0H^\Cv‰) \Cv0H0H\');
+PAINTCODE[Nptc].pc[12]:=('\C|‰)š\C0Hˆ0H\');PAINTCODE[Nptc].pc[13]:=('\C™0HchC0HhhC0HmhC0H\');PAINTCODE[Nptc].pc[14]:=('\C›0Hƒ0H\');
+PAINTCODE[Nptc].pc[15]:=('\C›0Hƒ0H\');PAINTCODE[Nptc].pc[16]:=('\C”†cC\Cz0HxhC0He0H\');PAINTCODE[Nptc].pc[17]:=('†cC\Cx†cC\Cy†cC\Cy†cC\Cy†cC\Cx†cC\C|0H…0H\');
+PAINTCODE[Nptc].pc[18]:=('\C–0Hˆ0H\');PAINTCODE[Nptc].pc[19]:=('0H^\C‹0H0H\');PAINTCODE[Nptc].pc[20]:=('0HchC0H¡0H\');
+PAINTCODE[Nptc].pc[21]:=('0HwhC0HwhC0Hp0H\');PAINTCODE[Nptc].pc[22]:=('0I-0H\');PAINTCODE[Nptc].pc[23]:=('0HŠhC0H_-fujL0HnhC0H_0H\');
+PAINTCODE[Nptc].pc[24]:=('0HmhC0H|-fujL’0Hp0H\');PAINTCODE[Nptc].pc[25]:=('0H^hC0H‹-fujL’e0Hm0H\');PAINTCODE[Nptc].pc[26]:=('0HhC0Hi-fvjL’e’xVŽ0Hj0H\');
+PAINTCODE[Nptc].pc[27]:=('0HŽ-fujL“e’xV‘0Hg0H\');PAINTCODE[Nptc].pc[28]:=('0H€‰},0Hf-fujL“e’xV’0Hf0H\');
+PAINTCODE[Nptc].pc[29]:=('0HhG0H`hC0H_-fujL’e“xV’0H`hC0H`0H\');PAINTCODE[Nptc].pc[30]:=('0HuhC0HchD)C]\EChD0Hc-fvjL’e’xV“0Hf0H\');
+PAINTCODE[Nptc].pc[31]:=('0H~hD)C^hD0Hc-fujL“e’xV“0Hf0H\');PAINTCODE[Nptc].pc[32]:=('0HhG0Hd-fujL“e’xV“0Hf0H\');
+PAINTCODE[Nptc].pc[33]:=('0HehC0Hq‰}*hK‰}*0Ha-fujL’e“xV’0Hg0H\');PAINTCODE[Nptc].pc[34]:=('hC0HqhC0HchO0H_-fvjL’e’xV“0Hg0H\');
+PAINTCODE[Nptc].pc[35]:=('0HzhIjLŽhCxVŽhG‰}+hC-fuhCjL’e’xV“0Hg0H\');PAINTCODE[Nptc].pc[36]:=('0HzhE‰}ŽhI‰}ŽhH-fu0H^jLe’xV“0Hg0H\');
+PAINTCODE[Nptc].pc[37]:=('0HzhE0H\hI0H]‰}ŽhE‰}Ž-fu0Hae’xV’0H_hC0Hc0H\');PAINTCODE[Nptc].pc[38]:=('0HzhE0H\hI0Ha-fv0HdexV’0Hh0H\');
+PAINTCODE[Nptc].pc[39]:=('0HzhE0H\hI0Ha-fu0HhxV‘0Hh0H\');PAINTCODE[Nptc].pc[40]:=('0Hz‰}ŽhC‰}Ž0H\hE0H\hE0Ha-fu0HkxVŽ0Hh0H\');
+PAINTCODE[Nptc].pc[41]:=('0HhhC0HhhC0HbhE0H\hE0Ha-fu0HchC0Hp0H\');PAINTCODE[Nptc].pc[42]:=('0H~hE0H\hE0H`-fv0Hy0H\');
+PAINTCODE[Nptc].pc[43]:=('hC0Hy`xhE`uhE`y-fu0Hc‰*{0HbhC0Hc0H\');PAINTCODE[Nptc].pc[44]:=('0Hl`…‰-*hE`uhE‰-*`x-fu`w‰*z-fy‰*z0Hf0H\');
+PAINTCODE[Nptc].pc[45]:=('0Hd`\D\`}\D\`whF`uhF`x-fu`v‰*v-fƒ‰*v`u0Hd0H\');PAINTCODE[Nptc].pc[46]:=('0H``†-fu`Ž‰*u-f…‰*u`y0H`0H\');
+PAINTCODE[Nptc].pc[47]:=('0H]`|\D\`y-f`†-fu`x‰*v-fƒ‰*v`|0H]0H\');PAINTCODE[Nptc].pc[48]:=('`-fx\Dd-fx`‡‰*|-fy‰*|`}0H\');
+PAINTCODE[Nptc].pc[49]:=('`-fw\Dj-fw`y-fu`y\D\`y‰*u`z‰*{`z‰*u`}`u');PAINTCODE[Nptc].pc[50]:=('`~-fv\Dn-fv`‚‰*v`‰‰*v`{`u');
+PAINTCODE[Nptc].pc[51]:=('`{-fu`v-fu\Dp-fu`}-fu`|\D\`‚\D\`}\D\`v`u');PAINTCODE[Nptc].pc[52]:=('`~-fv\Dn-fv`x-fu`‰-fu`‡`u');
+PAINTCODE[Nptc].pc[53]:=('`w\D\`z-fx\Dj-fx`{\Cƒ`ƒ\D\`|`u');PAINTCODE[Nptc].pc[54]:=('`~-fu`v-fx\Dd-fx`v-fu`x\Cx‰)š\Cx`{-fu``u');
+PAINTCODE[Nptc].pc[55]:=('`}-fu`z-f`z-fu`u\Cw‰) \Cw`ƒ\D\`w`u');PAINTCODE[Nptc].pc[56]:=('`\D\`Š\Cv‰)¤\Cv`y-fu`€`u');
+PAINTCODE[Nptc].pc[57]:=('`-fu`|\Cu‰*)\Cu`†`u');PAINTCODE[Nptc].pc[58]:=('`y\D\`|\D\`y-fu`\Cv‰)¤\Cv`~\Dc\D\');
+PAINTCODE[Nptc].pc[59]:=('`‘\D\`x\Cx‰) \Cx`{\D_\C{\Cu');PAINTCODE[Nptc].pc[60]:=('`~-gh`~\Cv`v\Cx‰)š\Cx`v\Cv`x\D^\C~\Cu');
+PAINTCODE[Nptc].pc[61]:=('`{-g_-f-g_`z\Cv`v-fu`u-fu`u\Cƒ`u-fu`v-fu`u\Cv`w\D\\C€\Cu');
+PAINTCODE[Nptc].pc[62]:=('`y-g^-f…-g^`w\Cu`u-fu`u-fu`{\Cu`w\Cu`v-fu`u\Cu`w-fu\Cu`v\Cu`v\Cu`v\D^\C~\Cu');
+PAINTCODE[Nptc].pc[63]:=('`y-g\-f‰-g\`z\Cu`v\Cu`u-fu\Cu`u-fu`u-fu`w\Cu`w-fv`w-fu`w\Cu`x\D\`u\D_\C{\Cu');
+PAINTCODE[Nptc].pc[64]:=('`x-g_-f…-g_`{-fu\Cu`u-fu`x\Cu`y\Cu`y-fv\Cu`z\D\`y\Dc\D\');
+PAINTCODE[Nptc].pc[65]:=('`v-g^`v-g_-f-g_`v-g^`~-fu`u\Cu`u-fu`u\Cu`v-fv`u\Cu`v-fu`{\D\`‚`u');PAINTCODE[Nptc].pc[66]:=('-g^`{-gh`{-g^`¢`u');
+PAINTCODE[Nptc].pc[67]:=('`Ž\D\`ž\D\`}`u');PAINTCODE[Nptc].pc[68]:=('`€F`u');
+
+DrawCode(PAINTCODE,1,1);              //you can change these coords
