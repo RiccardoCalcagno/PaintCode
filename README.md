@@ -1,7 +1,7 @@
 # Project description
 <div align="center">
   
-  ![Watch the video](https://markdown-videos-api.jorgenkh.no/youtube/llTMnB45OWE)
+  [![](https://markdown-videos-api.jorgenkh.no/youtube/llTMnB45OWE)](https://youtu.be/llTMnB45OWE)
 
   <i>Pitch presentation of the project</i>
 </div>
